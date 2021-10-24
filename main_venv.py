@@ -4,7 +4,6 @@ import os
 import time
 from shutil import copyfileobj
 from tabulate import tabulate
-from config import path as source
 
 chunk_size = 2 ** 20
 MB50 = 'http://ipv4.download.thinkbroadband.com/50MB.zip'
@@ -109,26 +108,24 @@ async def multipatrs_download(path):
 
 
 if __name__ == '__main__':
-    # while True:
-    # print('asyncio downloader')
-    # print('please paste url file for downloading or select file for speed test downloading:')
-    # print('1: 50MB.zip')
-    # print('2: 100MB.zip')
-    # print('3: 512MB.zip')
-    # print('4: 1GB.zip')
-    # answer = input('/>')
+    while True:
+        print('asyncio downloader')
+        print('please paste url file for downloading or select file for speed test downloading:')
+        print('1: 50MB.zip')
+        print('2: 100MB.zip')
+        print('3: 512MB.zip')
+        print('4: 1GB.zip')
+        answer = input('/>')
 
-    # if answer in APP:
-    #     print(APP[answer])
-    #     path = APP[answer]
-    # else:
-    #     print(answer)
-    #     path = answer
-    path = source
-    file_size, timeit = asyncio.run(multipatrs_download(path))
-    file_size = file_size//1000000
-    filename = get_filename(path)
-    make_file(filename)
-    print(
-        f'downloaded {file_size}MB in {int(timeit)}sec. => {(file_size / timeit):.2f}MB/sec')
-    # break
+        if answer in APP:
+            print(APP[answer])
+            path = APP[answer]
+        else:
+            print(answer)
+            path = answer
+        file_size, timeit = asyncio.run(multipatrs_download(path))
+        file_size = file_size//1000000
+        filename = get_filename(path)
+        make_file(filename)
+        print(f'downloaded {file_size}MB in {int(timeit)}sec. => {(file_size / timeit):.2f}MB/sec')
+        break
