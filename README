@@ -1,0 +1,4 @@
+A simple application for downloading files. 
+Put the address url of the file in the "config.py".
+Start command for example: "docker-compose up --build".
+Downloaded data will be in dir "downloads".
