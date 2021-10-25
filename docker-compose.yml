@@ -7,6 +7,7 @@ services:
     depends_on:
       - rs
     command: sh -c "python main.py"
+#    command: sh -c "python test.py"
 
   rs:
     image: redis
