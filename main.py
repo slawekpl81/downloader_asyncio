@@ -7,16 +7,6 @@ from tabulate import tabulate
 from config import path as source
 
 chunk_size = 2 ** 20
-MB50 = 'http://ipv4.download.thinkbroadband.com/50MB.zip'
-MB100 = 'http://ipv4.download.thinkbroadband.com/100MB.zip'
-MB512 = 'http://ipv4.download.thinkbroadband.com/512MB.zip'
-GB1 = 'http://ipv4.download.thinkbroadband.com/1GB.zip'
-
-APP = {'1': MB50,
-       '2': MB100,
-       '3': MB512,
-       '4': GB1,
-       '5': 'https://cdn.pixabay.com/photo/2019/01/06/14/08/frankfurt-3917054_960_720.jpg'}
 
 DOWNLOADED_DATA = dict()
 
@@ -66,12 +56,6 @@ def make_file(filename):
 
 
 async def multipatrs_download(path):
-    # path = 'https://cdn.pixabay.com/photo/2019/01/06/14/08/frankfurt-3917054_960_720.jpg'
-    # path = 'https://wallpapercave.com/wp/wp2646303.jpg'
-    # path = 'https://www.technocrazed.com/wp-content/uploads/2015/12/beautiful-wallpaper-download-14-640x360.jpg'
-    # path = 'http://ipv4.download.thinkbroadband.com/1GB.zip'
-    # path = 'http://ipv4.download.thinkbroadband.com/100MB.zip'
-
     async with aiohttp.ClientSession(cookie_jar=aiohttp.DummyCookieJar()) as session:
         async with session.head(path) as resp:
             print(f'Respons status:{resp.status}')
@@ -109,26 +93,10 @@ async def multipatrs_download(path):
 
 
 if __name__ == '__main__':
-    # while True:
-    # print('asyncio downloader')
-    # print('please paste url file for downloading or select file for speed test downloading:')
-    # print('1: 50MB.zip')
-    # print('2: 100MB.zip')
-    # print('3: 512MB.zip')
-    # print('4: 1GB.zip')
-    # answer = input('/>')
-
-    # if answer in APP:
-    #     print(APP[answer])
-    #     path = APP[answer]
-    # else:
-    #     print(answer)
-    #     path = answer
     path = source
     file_size, timeit = asyncio.run(multipatrs_download(path))
-    file_size = file_size//1000000
+    file_size = file_size // 1000000
     filename = get_filename(path)
     make_file(filename)
     print(
         f'downloaded {file_size}MB in {int(timeit)}sec. => {(file_size / timeit):.2f}MB/sec')
-    # break
