@@ -4,4 +4,11 @@ services:
     build: .
     volumes:
       - ./downloads:/downloads
+    depends_on:
+      - rs
     command: sh -c "python main.py"
+
+  rs:
+    image: redis
+    ports:
+      - "6379:6379"
